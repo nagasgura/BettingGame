@@ -1,27 +1,42 @@
-*.py[co]
+import random
+import time
 
-# Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
-.installed.cfg
+def inputGuess():
+    guess = ''
+    print('You have a 50% chance of winning.')
+    while guess != '1' and guess != '2':
+        guess = input('Choose 1 or 2:  ')
+        if guess != '1' and guess != '2':
+            print("Sorry, that is not a valid choice.")
+            
+    return guess
+def inputBet():
+    print("You have " +str(amountOfMoney)+ " dollars. How much would you like to bet?")
+    betofMoney = int(input())
+    
+    return betofMoney
+def displayOutcome(guessedNumber,betofMoney):
+    winningNumber = random.randint(1,2)
+    if guessedNumber == winningNumber:
+        moneyAmount = int(amountOfMoney) + int(betofMoney)
+        print("Congradulations! You won!")
+        print("You now have " +str(moneyAmount)+ " dollars.")
+    else:
+        moneyAmount = int(amountOfMoney) - int(betofMoney)
+        print("Sorry, you lost.")
+        print("You now have " +str(moneyAmount)+ " dollars.")
+        moneyAmount = int(moneyAmount)
+    return moneyAmount
 
-# Installer logs
-pip-log.txt
-
-# Unit test / coverage reports
-.coverage
-.tox
-
-#Translations
-*.mo
-
-#Mr Developer
-.mr.developer.cfg
+amountOfMoney = 500          
+playAgain = 'yes'
+while playAgain == 'yes' or playAgain == 'y':
+    inputGuess()
+    inputBet()
+    guess = inputGuess()
+    bet = inputBet()
+    displayOutcome(guess,bet)
+    amountOfMoney = displayOutcome
+    print("Would you like to play again?")
+    playAgain = input()
+print("Goodbye! You final winnings are " +str(amountOfMoney)+ " dollars.")
